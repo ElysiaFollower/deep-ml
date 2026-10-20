@@ -6,18 +6,22 @@ def softmax(scores: list[float]) -> list[float]:
         return []
 
 
-    res = []
-    maxz = scores[0]
-    for z in scores:
-        if z > maxz:
-            maxz = z
+    # res = []
+    # maxz = scores[0]
+    # for z in scores:
+    #     if z > maxz:
+    #         maxz = z
     
-    for z in scores:
-        res.append( math.exp(z - maxz) )
+    # for z in scores:
+    #     res.append( math.exp(z - maxz) )
     
-    sumup = sum(res)
-    res = [ ez / sumup for ez in res]
+    # sumup = sum(res)
+    # res = [ ez / sumup for ez in res]
 
-    
+    import numpy as np
 
-    return res
+    arr = np.array(scores)
+    arr = np.exp(arr - arr.max())
+    arr /= arr.sum()
+
+    return arr.tolist()
